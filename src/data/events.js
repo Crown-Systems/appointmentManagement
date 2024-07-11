@@ -3,7 +3,7 @@ export const events = [
         id: 1,
         title: 'Meeting with Client A',
         start: new Date(2024, 6, 15, 10, 0), // year, month (0-indexed), day, hour, minute
-        end: new Date(2024, 6, 15, 12, 0),
+        end: new Date(2024, 6, 18, 12, 0),
     },
     {
         id: 2,

@@ -6,7 +6,7 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import LeftSidebar from '../../app/components/admin/leftSidebar/LeftSidebar';
 import { customers, events } from '../../data/events';
-import './dashboard.module.scss';
+import styles from './appointments.module.scss';
 
 const localizer = momentLocalizer(moment)
 
@@ -20,23 +20,22 @@ const Dashboard = (props) => {
     };
 
     return (
-        <div style={{ display: 'flex', height: '100vh' }}>
+        <div className={styles.container}>
             <LeftSidebar onSelectCustomer={handleSelectCustomer} />
-            <div style={{ flex: 1, padding: '20px' }}>
-                <h1>Customer Dashboard</h1>
-                {selectedCustomer && (
-                    <div>
+            <div className={styles.pageBody}>
+                <div className={styles.subHeading}>
+                    <h1>Customer Dashboard</h1>
+                    {selectedCustomer && (
                         <h2>Schedule for {customers.find(c => c.id === selectedCustomer).name}</h2>
-                        {/* Implement schedule display component or logic */}
-                        <Calendar
-                            localizer={localizer}
-                            events={events}
-                            startAccessor="start"
-                            endAccessor="end"
-                            style={{ height: 500 }}
-                        />
-                    </div>
-                )}
+                    )}
+                </div>
+                <Calendar
+                    localizer={localizer}
+                    events={events}
+                    startAccessor="start"
+                    endAccessor="end"
+                    style={{ height: 500, width: '100%' }}
+                />
             </div>
         </div>);
 }

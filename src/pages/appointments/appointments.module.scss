@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  .pageBody {
+    height: 100%;
+    width: 100%;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    .subHeading {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 1rem 0;
+      h1 {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      h2 {
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-
+"use client";
 function userProfile() {
     return (
         <div>userProfile</div>

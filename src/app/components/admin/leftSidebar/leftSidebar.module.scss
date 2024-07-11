@@ -1,27 +1,35 @@
 .sidebar {
-  width: 250px;
-  height: 100%;
+  width: 20vw;
+  height: 100vh;
   background-color: #f0f0f0;
-  padding: 20px;
+  padding: 1rem 2rem;
+  font-size: 16px;
+  font-weight: 400;
+  .searchInput {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.8rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
 }
 
 .customerList {
   list-style-type: none;
   padding: 0;
   cursor: pointer;
-}
+  li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    &:hover {
+      background-color: #e0e0e0;
+      color: #000;
+    }
+  }
 
-.customerList li {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.customerList li:hover {
-  background-color: #e0e0e0;
-}
-
-.customerList .selected {
-  background-color: #0070f3;
-  color: #fff;
+  .selected {
+    background-color: #3174ad;
+    color: #fff;
+  }
 }

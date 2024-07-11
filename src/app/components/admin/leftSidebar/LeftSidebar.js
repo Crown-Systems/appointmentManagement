@@ -10,11 +10,28 @@ const LeftSidebar = ({ onSelectCustomer }) => {
         onSelectCustomer(customerId); // Notify parent component about selected customer
     };
 
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const filteredCustomers = customers.filter((customer) =>
+        customer.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div className={styles.sidebar}>
             <h2>Customers</h2>
+            <input
+                className={styles.searchInput}
+                type="text"
+                placeholder="Search by name"
+                value={searchTerm}
+                onChange={handleSearch}
+            />
             <ul className={styles.customerList}>
-                {customers.map((customer) => (
+                {filteredCustomers.map((customer) => (
                     <li
                         key={customer.id}
                         className={customer.id === selectedCustomerId ? styles.selected : ''}
