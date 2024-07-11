@@ -1,7 +1,8 @@
-/* components/NavBar.module.css */
+@import "https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap";
 .nav {
   background-color: #333;
   padding: 1rem;
+  font-family: "Roboto", sans-serif;
 }
 
 .navList {

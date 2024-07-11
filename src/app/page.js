@@ -9,13 +9,13 @@ export default function HomePage() {
         <Link className={styles.link} href="/">
           Home
         </Link>
-        <Link className={styles.link} href="/profile">
+        <Link className={styles.link} href="/userProfile">
           User Profile
         </Link>
-        <Link lassName={styles.link} href="/appointments">
+        <Link className={styles.link} href="/appointments">
           Appointments
         </Link>
-        <Link lassName={styles.link} href="/settings">
+        <Link className={styles.link} href="/settings">
           Settings
         </Link>
       </div>
