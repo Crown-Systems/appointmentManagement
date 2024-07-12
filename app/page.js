@@ -44,61 +44,63 @@ export default function HomePage() {
             </Link>
           </div>
         </nav>
-        <container className={styles.main}>
-          <section className={styles.home}>
-            <div className={styles.card}>
-              <h1>Requests</h1>
+        <div className={styles.bodyContainer}>
+          <container className={styles.main}>
+            <section className={styles.home}>
+              <div className={styles.card}>
+                <h1>Requests</h1>
+                <p>
+                  This is the home page. You can see the user profile, appointments,
+                  and settings pages.
+                </p>
+              </div>
+              <div className={styles.card}>
+                <h1>Confirmed</h1>
+                <p>
+                  This is the home page. You can see the user profile, appointments,
+                  and settings pages.
+                </p>
+              </div>
+              <div className={styles.card}>
+                <h1>Today&rsquo;s</h1>
+                <p>
+                  This is the home page. You can see the user profile, appointments,
+                  and settings pages.
+                </p>
+              </div>
+              <div className={styles.card}>
+                <h1>Tomorrow&rsquo;s</h1>
+                <p>
+                  This is the home page. You can see the user profile, appointments,
+                  and settings pages.
+                </p>
+              </div>
+            </section>
+            <section className={styles.summary}>
+              <h1>Summary</h1>
               <p>
-                This is the home page. You can see the user profile, appointments,
-                and settings pages.
+                This is the summary section. You can see the user profile, appointments,
               </p>
-            </div>
-            <div className={styles.card}>
-              <h1>Confirmed</h1>
-              <p>
-                This is the home page. You can see the user profile, appointments,
-                and settings pages.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <h1>Today&rsquo;s</h1>
-              <p>
-                This is the home page. You can see the user profile, appointments,
-                and settings pages.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <h1>Tomorrow&rsquo;s</h1>
-              <p>
-                This is the home page. You can see the user profile, appointments,
-                and settings pages.
-              </p>
-            </div>
-          </section>
-          <section className={styles.summary}>
+            </section>
+          </container>
+          <container className={styles.side}>
             <h1>Insights</h1>
-            <p>
-              This is the home page. You can see the user profile, appointments,
-              and settings pages.
-            </p>
-          </section>
-        </container>
-        <container className={styles.side}>
-          <section className={styles.sidebar}>
-            <h1>Home Page</h1>
-            <p>
-              This is the home page. You can see the user profile, appointments,
-              and settings pages.
-            </p>
-          </section>
-          <section className={styles.sidebar}>
-            <h1>Home Page</h1>
-            <p>
-              This is the home page. You can see the user profile, appointments,
-              and settings pages.
-            </p>
-          </section>
-        </container>
+            <section className={styles.sidebar}>
+              <h1>Home Page</h1>
+              <p>
+                This is the home page. You can see the user profile, appointments,
+                and settings pages.
+              </p>
+            </section>
+            <section className={styles.sidebar}>
+              <h1>Home Page</h1>
+              <p>
+                This is the home page. You can see the user profile, appointments,
+                and settings pages.
+              </p>
+            </section>
+          </container>
+        </div>
       </div>
     </Layout>
   );
