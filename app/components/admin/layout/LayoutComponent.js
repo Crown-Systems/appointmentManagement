@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from 'next/navigation';
+import styles from './layoutComponent.module.scss';
 import NavBar from './navbar/Navbar';
 
 const Layout = ({ children }) => {
@@ -12,7 +13,7 @@ const Layout = ({ children }) => {
   const shouldShowNavbar = !noNavbarRoutes.includes(pathname);
 
   return (
-    <div>
+    <div className={styles.layoutContainer}>
       {shouldShowNavbar && <NavBar />}
       <main>{children}</main>
     </div>
