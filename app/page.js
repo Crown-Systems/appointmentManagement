@@ -99,6 +99,27 @@ export default function HomePage() {
                 and settings pages.
               </p>
             </section>
+            <section className={styles.sidebar}>
+              <h1>Home Page</h1>
+              <p>
+                This is the home page. You can see the user profile, appointments,
+                and settings pages.
+              </p>
+            </section>
+            <section className={styles.sidebar}>
+              <h1>Home Page</h1>
+              <p>
+                This is the home page. You can see the user profile, appointments,
+                and settings pages.
+              </p>
+            </section>
+            <section className={styles.sidebar}>
+              <h1>Home Page</h1>
+              <p>
+                This is the home page. You can see the user profile, appointments,
+                and settings pages.
+              </p>
+            </section>
           </container>
         </div>
       </div>
