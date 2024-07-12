@@ -5,8 +5,6 @@ const Appointment = dynamic(() => import('../../app/components/admin/appointment
 
 export default function Dashboard() {
     return (
-        <div>
-            <Appointment />
-        </div>
+        <Appointment />
     )
 }

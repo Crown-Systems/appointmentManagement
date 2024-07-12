@@ -1,6 +1,7 @@
 .container {
   text-align: center;
   padding: 2rem;
+  font-family: "Inter", sans-serif;
 }
 
 .links {
@@ -11,7 +12,7 @@
   display: inline-block;
   margin: 1rem;
   padding: 1rem 2rem;
-  background-color: #0070f3;
+  background-color: #23a6f0;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -19,5 +20,5 @@
 }
 
 .link:hover {
-  background-color: #005bb5;
+  background-color: #1d85c0;
 }

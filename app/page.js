@@ -1,20 +1,17 @@
 import Link from 'next/link';
-import Layout from './components/admin/layout/Layout';
-import styles from './page.module.css';
+import Layout from './components/admin/layout/LayoutComponent';
+import styles from './page.module.scss';
 export default function HomePage() {
-  const metadata = {
-    title: 'Dashboard',
-    description: 'Your dashboard page',
-  };
+
   return (
-    <Layout metadata={metadata}>
+    <Layout>
       <div className={styles.container}>
-        <h1>Welcome to Your Dashboard</h1>
+        <h1>Welcome to Appointment Management Dashboard</h1>
         <div className={styles.links}>
           <Link className={styles.link} href="/">
             Home
           </Link>
-          <Link className={styles.link} href="/userProfile">
+          <Link className={styles.link} href="/user">
             User Profile
           </Link>
           <Link className={styles.link} href="/appointments">

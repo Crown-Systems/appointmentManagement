@@ -1,0 +1,40 @@
+.container {
+  margin: 1.5rem auto 0 auto;
+  padding: 1.5rem;
+
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem auto;
+
+    label {
+      margin-bottom: 10px;
+      font-size: 1em;
+
+      input[type="checkbox"] {
+        margin-right: 10px;
+      }
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 10px 20px;
+      background-color: #23a6f0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: fit-content;
+
+      &:hover {
+        background-color: #1d85c0;
+      }
+    }
+  }
+}

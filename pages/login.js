@@ -19,13 +19,13 @@ const LoginPage = () => {
                 <div>
                     <p>Welcome, {user.name}!</p>
                     <Link href="/dashboard">
-                        <a>Go to Dashboard</a>
+                        Go to Dashboard
                     </Link>
                 </div>
             ) : (
                 <div>
                     <p>Please log in to continue:</p>
-                    <a href="/api/auth/login">Log In</a>
+                    <button href="/api/auth/login">Log In</button>
                 </div>
             )}
         </div>

@@ -1,0 +1,41 @@
+.container {
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    label {
+      font-size: 1.2rem;
+      text-align: left;
+      align-self: flex-start;
+    }
+    label {
+      font-size: 1.2rem;
+      text-align: left;
+      align-self: flex-start;
+    }
+    input {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background-color: #23a6f0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+  }
+}
