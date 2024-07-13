@@ -5,14 +5,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px;
+  padding: 0 1.5rem;
   font-family: Arial, sans-serif;
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 10px 0;
+    padding: 0.5rem 0;
     color: #333;
 
     .search {
@@ -26,29 +26,31 @@
       }
       button {
         padding: 8px 12px;
-        background-color: #4caf50;
+        background-color: #20ccc4;
         border: none;
         border-radius: 4px;
-        color: 333;
+        color: #fff;
         cursor: pointer;
+        &:hover {
+          box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
+        }
       }
     }
 
     .links {
       display: flex;
       align-items: center;
-
       .link {
         padding: 10px;
         color: #333;
         text-decoration: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
 
         &:hover {
           text-decoration: underline;
-        }
-
-        &:not(:last-child) {
-          margin-right: 10px;
         }
       }
     }
@@ -68,15 +70,15 @@
       gap: 20px;
       width: 100%;
       margin-top: 20px;
-
+      h1 {
+        color: #333;
+      }
       .home,
       .summary {
         flex: 1;
         padding: 20px;
-        background-color: #f0f0f0;
-        border: 1px solid #ccc;
+        border: 1px solid #20ccc4;
         border-radius: 4px;
-
         h1 {
           margin-bottom: 10px;
           color: #333;
@@ -91,19 +93,21 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
-      margin-top: 20px;
+      gap: 1rem;
       .card {
         flex: 1;
         padding: 20px;
         background-color: #f0f0f0;
-        border: 1px solid #ccc;
+        border-bottom: 5px solid #20ccc4;
         border-radius: 4px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin: 0.5rem 0;
         h1 {
           margin-bottom: 10px;
-          color: #333;
+          color: #20ccc4;
         }
         p {
-          color: #666;
+          color: #000;
         }
       }
     }
@@ -122,22 +126,30 @@
       margin-top: 20px;
       h1 {
         margin-bottom: 10px;
-        color: #333;
+        color: #20ccc4;
       }
       .sidebar {
         flex: 1;
         padding: 20px;
-        background-color: #e0e0e0;
-        border: 1px solid #ccc;
+        background-color: #fff;
+        border: 1px solid #20ccc4;
         border-radius: 4px;
+        margin: 0.5rem 0;
 
         h1 {
           margin-bottom: 10px;
-          color: #333;
+          color: #061725;
         }
 
         p {
-          color: #666;
+          border-bottom: 1px solid #20ccc4;
+          font-size: 14px;
+          background-color: #f0f0f0;
+          color: #061725;
+          margin: 0.25rem 0;
+          padding: 0.25rem 0.5rem;
+          border-radius: 5px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
       }
     }

@@ -7,7 +7,7 @@ export default function HomePage() {
     <Layout>
       <div className={styles.mainContainer}>
         <nav>
-          <div className="search">
+          <div className={styles.search}>
             <input type="text" placeholder="Search" />
             <button>Search</button>
           </div>
@@ -46,6 +46,7 @@ export default function HomePage() {
         </nav>
         <div className={styles.bodyContainer}>
           <container className={styles.main}>
+            <h1>Dashboard</h1>
             <section className={styles.home}>
               <div className={styles.card}>
                 <h1>Requests</h1>
@@ -86,38 +87,24 @@ export default function HomePage() {
           <container className={styles.side}>
             <h1>Insights</h1>
             <section className={styles.sidebar}>
-              <h1>Home Page</h1>
+              <h1>Overdue appointments</h1>
               <p>
-                This is the home page. You can see the user profile, appointments,
-                and settings pages.
+                Customer "ABC" appointments that are overdue. For rescheduling.please contact the customer & set it up in the appointment section.
+              </p>
+              <p>
+                Customer "XYZ" appointments that are overdue. For rescheduling.please contact the customer & set it up in the appointment section.
+              </p>
+              <p>
+                Customer "ASD" appointments that are overdue. For rescheduling.please contact the customer & set it up in the appointment section.
+              </p>
+              <p>
+                Customer "SKW" appointments that are overdue. For rescheduling.please contact the customer & set it up in the appointment section.
               </p>
             </section>
             <section className={styles.sidebar}>
-              <h1>Home Page</h1>
+              <h1>Available space</h1>
               <p>
-                This is the home page. You can see the user profile, appointments,
-                and settings pages.
-              </p>
-            </section>
-            <section className={styles.sidebar}>
-              <h1>Home Page</h1>
-              <p>
-                This is the home page. You can see the user profile, appointments,
-                and settings pages.
-              </p>
-            </section>
-            <section className={styles.sidebar}>
-              <h1>Home Page</h1>
-              <p>
-                This is the home page. You can see the user profile, appointments,
-                and settings pages.
-              </p>
-            </section>
-            <section className={styles.sidebar}>
-              <h1>Home Page</h1>
-              <p>
-                This is the home page. You can see the user profile, appointments,
-                and settings pages.
+                This is the section for available space. You can see the user appointments, and settings pages.
               </p>
             </section>
           </container>
