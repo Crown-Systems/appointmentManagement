@@ -17,6 +17,12 @@ const NavBar = () => {
                         </svg>
                         Appointments
                     </Link>
+                    <Link className={styles.sectionLink} href="/admin/clients">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c2.21 0 4-1.79 4-4S14.21 3 12 3 8 4.79 8 7s1.79 4 4 4zM4 21v-2c0-2.21 3.58-4 8-4s8 1.79 8 4v2H4z" />
+                        </svg>
+                        Clients
+                    </Link>
                     <Link className={styles.sectionLink} href="/user">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c2.21 0 4-1.79 4-4S14.21 3 12 3 8 4.79 8 7s1.79 4 4 4zM4 21v-2c0-2.21 3.58-4 8-4s8 1.79 8 4v2H4z" />
