@@ -37,10 +37,9 @@ const LeftSidebar = ({ onSelectCustomer }) => {
                         className={customer.id === selectedCustomerId ? styles.selected : ''}
                         onClick={() => handleCustomerClick(customer.id)}
                     >
-                        <div>
-                            <strong>{customer.name}</strong>
-                        </div>
-                        <div>{customer.contact}</div>
+
+                        <strong>{customer.name}</strong>
+                        <div className={styles.contact}>{customer.contact}</div>
                     </li>
                 ))}
             </ul>

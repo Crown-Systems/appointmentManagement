@@ -1,11 +1,16 @@
 .container {
   display: flex;
   flex-direction: row;
+  font-family: "Inter", sans-serif;
+  height: 100%;
+  width: 100%;
 
   .content {
     width: 100%;
-    padding: 20px;
-    background-color: #f5f5f5;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 10px #ccc;
     border-radius: 5px;
     margin-left: 20px;
 
@@ -25,12 +30,13 @@
           border-bottom: none;
         }
 
-        .clientName {
+        .subHeading {
           font-weight: bold;
           font-size: 18px;
+          margin-bottom: 1rem;
         }
 
-        .clientEmail {
+        .clientDetails {
           font-size: 14px;
           color: #666;
         }

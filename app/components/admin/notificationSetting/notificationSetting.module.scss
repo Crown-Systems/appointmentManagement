@@ -24,7 +24,7 @@
     button {
       margin-top: 1rem;
       padding: 10px 20px;
-      background-color: #23a6f0;
+      background-color: #20ccc4;
       color: white;
       border: none;
       border-radius: 5px;
@@ -33,7 +33,7 @@
       width: fit-content;
 
       &:hover {
-        background-color: #1d85c0;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
       }
     }
   }

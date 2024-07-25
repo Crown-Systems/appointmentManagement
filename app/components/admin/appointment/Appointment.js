@@ -17,7 +17,7 @@ const Appointment = () => {
                     events={events}
                     startAccessor="start"
                     endAccessor="end"
-                    style={{ height: 500, width: '100%' }}
+                    style={{ width: '100%', height: '100%' }}
                 />
             </div>
         </div>

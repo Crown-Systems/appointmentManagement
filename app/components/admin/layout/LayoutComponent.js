@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
       {shouldShowNavbar && <NavBar />}
       <main>
         {shouldShowNavbar && <TopNav />}
-        <div className="content">
+        <div className={styles.content}>
           {children}
         </div>
       </main>

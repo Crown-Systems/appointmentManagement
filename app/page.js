@@ -26,18 +26,6 @@ const LoginPage = async () => {
     } else {
         redirect('/client');
     }
-
-    // This part will not be reached because of the redirect
-    return (
-        <div className={styles['login-container']}>
-            <h1>Crown Appointments</h1>
-            <Image src={user.picture} alt="Crown Logo" width={200} height={200} />
-            <p>Welcome, {user.name}!</p>
-            <p>Email: {user.email}</p>
-            <p>Role: {isUser ? 'User' : 'Client'}</p>
-            <Link href={process.env.LOGOUT_URL}>Logout</Link>
-        </div>
-    );
 };
 
 export default LoginPage;
