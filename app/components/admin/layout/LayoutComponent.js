@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import styles from './layoutComponent.module.scss';
 import NavBar from './navbar/Navbar';
+import TopNav from './navbar/TopNav';
 
 const Layout = ({ children }) => {
   const pathname = usePathname();
@@ -15,7 +16,12 @@ const Layout = ({ children }) => {
   return (
     <div className={styles.layoutContainer}>
       {shouldShowNavbar && <NavBar />}
-      <main>{children}</main>
+      <main>
+        {shouldShowNavbar && <TopNav />}
+        <div className="content">
+          {children}
+        </div>
+      </main>
     </div>
   );
 };

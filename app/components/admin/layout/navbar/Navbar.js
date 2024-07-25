@@ -4,7 +4,6 @@ import styles from './navbar.module.scss';
 
 const NavBar = () => {
     const path = usePathname();
-    console.log(path == "/admin/appointments");
     return (
         <nav className={`${styles.flexContainer} ${styles.spaceX6}`}>
             <div className={styles.sidebar}>
