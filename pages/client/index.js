@@ -36,7 +36,6 @@ export const getServerSideProps = async (context) => {
     ];
 
     const services = ['Grooming', 'Veterinary Checkup', 'Swimming'];
-    console.log(session.user["http://localhost:3000/roles"][0]);
     return {
         props: {
             user: session.user.nickname,

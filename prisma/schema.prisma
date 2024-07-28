@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model pointcloud_formats {
+  pcid   Int     @id
+  srid   Int?
+  schema String?
+}
+
+model roles {
+  id    Int    @id
+  email String @db.VarChar(255)
+  roles String @db.VarChar(10)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model spatial_ref_sys {
+  srid      Int     @id
+  auth_name String? @db.VarChar(256)
+  auth_srid Int?
+  srtext    String? @db.VarChar(2048)
+  proj4text String? @db.VarChar(2048)
+}
+
+model us_gaz {
+  id        Int     @id(map: "pk_us_gaz") @default(autoincrement())
+  seq       Int?
+  word      String?
+  stdword   String?
+  token     Int?
+  is_custom Boolean @default(true)
+}
+
+model us_lex {
+  id        Int     @id(map: "pk_us_lex") @default(autoincrement())
+  seq       Int?
+  word      String?
+  stdword   String?
+  token     Int?
+  is_custom Boolean @default(true)
+}
+
+model us_rules {
+  id        Int     @id(map: "pk_us_rules") @default(autoincrement())
+  rule      String?
+  is_custom Boolean @default(true)
+}
