@@ -1,9 +1,10 @@
 "use client";
 
+import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import styles from './layoutComponent.module.scss';
-import NavBar from './navbarClient/NavbarClient';
 import TopNav from './navbarClient/TopNavClient';
+const NavBarClient = dynamic(() => import('./navbarClient/NavbarClient'), { ssr: false });
 
 const Layout = ({ children }) => {
   const pathname = usePathname();
@@ -15,7 +16,7 @@ const Layout = ({ children }) => {
 
   return (
     <div className={styles.layoutContainer}>
-      {shouldShowNavbar && <NavBar />}
+      {shouldShowNavbar && <NavBarClient />}
       <main>
         {shouldShowNavbar && <TopNav />}
         <div className={styles.content}>
