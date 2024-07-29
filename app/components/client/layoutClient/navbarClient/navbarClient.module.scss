@@ -5,57 +5,71 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 50px;
     height: 100%;
-    background-color: #e6e6e6;
+    background-color: #111827;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: "Inter", sans-serif;
-    &.spaceX6 {
-      gap: 1.5rem;
-    }
 
     .sidebar {
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 50px;
+      margin: 0 0.25rem;
       height: 100%;
       overflow: hidden;
       color: #9ca3af;
 
-      .sidebarSections {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        margin: 0.75rem auto;
-      }
-
-      .sectionLink {
-        width: 100%;
+      .sidebarLink {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-        padding: 1rem 0.5rem;
-        margin-top: 0.5rem;
+        justify-content: center;
+        height: 40px;
+        width: 100%;
+        margin: 0.5rem auto;
         border-radius: 0.25rem;
+        background-color: #fff;
 
         &:hover {
           background-color: #20ccc4;
-          color: rgb(73, 76, 78);
-        }
-
-        svg {
-          width: 1.5rem;
-          height: 1.5rem;
-          stroke: currentColor;
-        }
-
-        &.highlight {
-          background-color: #374151;
           color: #d1d5db;
         }
       }
 
+      .sidebarSections {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 0.75rem auto;
+
+        .sectionLink {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem 0.5rem;
+          margin-top: 0.5rem;
+          border-radius: 0.25rem;
+          background-color: #e6e6e6;
+
+          &:hover {
+            background-color: #20ccc4;
+            color: rgb(73, 76, 78);
+          }
+
+          svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            stroke: currentColor;
+          }
+
+          &.highlight {
+            background-color: #374151;
+            color: #d1d5db;
+          }
+        }
+      }
       // .sidebarFooter {
       //   display: flex;
       //   align-items: center;

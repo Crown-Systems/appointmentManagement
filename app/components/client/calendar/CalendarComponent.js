@@ -1,48 +1,80 @@
 import moment from 'moment';
-import { useState } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import BookingModal from '../bookingModal/BookingModal';
-// import styles from './calendarComponent.scss';
+import styles from './calendarComponent.module.scss';
 
 const localizer = momentLocalizer(moment);
 
 const CalendarComponent = ({ events, services, onAddEvent }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [availableSlots, setAvailableSlots] = useState([]);
     const [selectedSlot, setSelectedSlot] = useState(null);
 
-    const handleSelectSlot = ({ start, end }) => {
-        setSelectedSlot({ start, end });
-        setIsModalOpen(true);
+    useEffect(() => {
+        const fetchAvailableSlots = async () => {
+            const response = await fetch(`/api/availableSlots?date=${selectedDate.toISOString()}`);
+            const data = await response.json();
+            setAvailableSlots(data.slots);
+        };
+
+        fetchAvailableSlots();
+    }, [selectedDate]);
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
     };
 
-    const handleAddEvent = (newEvent) => {
-        onAddEvent({ ...selectedSlot, ...newEvent });
-        setIsModalOpen(false);
-    };
-
-    const handleSelectEvent = (event) => {
-        alert(event.title);
+    const handleSlotChange = (slot) => {
+        setSelectedSlot(slot);
     };
 
     return (
-        <div>
-            <Calendar
-                localizer={localizer}
-                events={events}
-                startAccessor="start"
-                endAccessor="end"
-                selectable
-                onSelectSlot={handleSelectSlot}
-                onSelectEvent={handleSelectEvent}
-                style={{ height: 500 }}
-            />
-            <BookingModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onAddEvent={handleAddEvent}
-                services={services}
-            />
+        <div className={styles.container}>
+            <header className={styles.header}>
+                <input type="text" placeholder="Search" className={styles.search} />
+                <div className={styles.icons}>
+                    <i className="fa fa-bell"></i>
+                    <i className="fa fa-question-circle"></i>
+                    <Image src="/icons/userIcon.png" width={24} height={24} alt="User" className={styles.userImage} />
+                </div>
+            </header>
+            <div className={styles.booking}>
+                <h1>Book Appointment</h1>
+                <div className={styles.calendar}>
+                    <div className={styles.calendarHeader}>
+                        <span>JULY 2023</span>
+                    </div>
+                    <div className={styles.dates}>
+                        {[...Array(31)].map((_, index) => (
+                            <div
+                                key={index}
+                                className={`${styles.date} ${selectedDate.getDate() === index + 1 ? styles.selectedDate : ''}`}
+                                onClick={() => handleDateChange(new Date(2023, 6, index + 1))}
+                            >
+                                {index + 1}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className={styles.slots}>
+                    <h2>Choose Slot</h2>
+                    <div className={styles.slotGrid}>
+                        {availableSlots.map((slot, index) => (
+                            <div
+                                key={index}
+                                className={`${styles.slot} ${selectedSlot === slot ? styles.selectedSlot : ''}`}
+                                onClick={() => handleSlotChange(slot)}
+                            >
+                                {slot}
+                            </div>
+                        ))}
+                    </div>
+                    <button className={styles.continueButton}>CONTINUE</button>
+                    <p className={styles.reschedulingNotice}>Rescheduling charges may apply.</p>
+                </div>
+            </div>
         </div>
     );
 };

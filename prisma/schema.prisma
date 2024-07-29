@@ -17,3 +17,10 @@ model roles {
   email String @db.VarChar(255)
   roles String @db.VarChar(10)
 }
+
+model Slot {
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  time        String
+  isAvailable Boolean  @default(true)
+}
