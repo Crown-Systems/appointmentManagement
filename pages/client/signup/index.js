@@ -1,7 +1,33 @@
-// pages/signup.js
+import { PrismaClient } from '@prisma/client';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styles from './signup.module.scss';
+
+const prisma = new PrismaClient();
+
+async function newProfile(email, password, name) {
+    const clientRole = await prisma.role.findUnique({
+        where: { name: 'client' },
+    });
+
+    const user = await prisma.user.create({
+        data: {
+            email,
+            password,
+            name,
+            roles: {
+                create: {
+                    role: {
+                        connect: { id: clientRole.id },
+                    },
+                },
+            },
+        },
+    });
+
+    return user;
+}
+
 const SignUp = () => {
     const [formData, setFormData] = useState({
         username: '',
@@ -21,27 +47,7 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would typically send formData to your server for processing
-        // For example, using fetch to send a POST request
-        try {
-            const response = await fetch('/api/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
-                // Redirect or show success message
-                router.push('/success');
-            } else {
-                // Handle error
-                console.error('Sign-up failed');
-            }
-        } catch (error) {
-            console.error('An error occurred:', error);
-        }
+        newProfile(formData.email, formData.password, formData.username);
     };
 
     return (
