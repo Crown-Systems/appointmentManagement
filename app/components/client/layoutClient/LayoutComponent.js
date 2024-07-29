@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import styles from './layoutComponent.module.scss';
 import NavBar from './navbarClient/NavbarClient';
-import TopNav from './navbarClient/TopNav';
+import TopNav from './navbarClient/TopNavClient';
 
 const Layout = ({ children }) => {
   const pathname = usePathname();

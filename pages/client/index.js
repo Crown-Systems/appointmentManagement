@@ -1,16 +1,16 @@
 import { getSession } from '@auth0/nextjs-auth0';
 import dynamic from 'next/dynamic';
 
-const CalendarContainer = dynamic(() => import('../../app/components/client/calendar/CalendarComponent'), { ssr: false });
+const ClientLayout = dynamic(() => import('../../app/components/client/layoutClient/LayoutComponent'));
+const CalendarContainer = dynamic(() => import('../../app/components/client/calendar/CalendarComponent'));
 
 const Client = ({ user, role, initialEvents, services }) => {
     return (
-        <div>
+        <ClientLayout>
             <h1>Welcome to ...Crown Appointments...</h1>
             {user ? <p>Welcome, {user}! as {role}</p> : <p>Loading...</p>}
             <CalendarContainer initialEvents={initialEvents} services={services} />
-            {/* Add more dashboard components here */}
-        </div>
+        </ClientLayout>
     );
 };
 
