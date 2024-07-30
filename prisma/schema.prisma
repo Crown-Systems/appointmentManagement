@@ -32,9 +32,17 @@ model UserRole {
   @@unique([userId, roleId])
 }
 
-model Slot {
-  id          Int      @id @default(autoincrement())
-  date        DateTime
-  time        String
-  isAvailable Boolean  @default(true)
+model Appointment {
+  id        Int      @id @default(autoincrement())
+  title     String
+  start     DateTime
+  end       DateTime
+  createdAt DateTime @default(now())
+}
+
+model Unavailability {
+  id        Int      @id @default(autoincrement())
+  start     DateTime
+  end       DateTime
+  createdAt DateTime @default(now())
 }
