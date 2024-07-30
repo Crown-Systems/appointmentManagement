@@ -10,16 +10,16 @@ datasource db {
 model User {
   id        Int       @id @default(autoincrement())
   email     String    @unique
-  name      String
+  name      String?
   password  String
-  roles     UserRole[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+  userRoles UserRole[]
 }
 
 model Role {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  users     UserRole[]
+  id    Int      @id @default(autoincrement())
+  name  String   @unique
+  userRoles UserRole[]
 }
 
 model UserRole {

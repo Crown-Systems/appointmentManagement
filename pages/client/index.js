@@ -5,7 +5,7 @@ import styles from './clientHome.module.scss';
 
 const ClientLayout = dynamic(() => import('../../app/components/client/layoutClient/LayoutComponent'));
 
-const Client = ({ user, role, services }) => {
+const Client = ({ user, role, initialEvents, services }) => {
     return (
         <ClientLayout>
             <div className={styles.container}>
@@ -49,6 +49,24 @@ export const getServerSideProps = async (context) => {
 
     const user = session.user;
 
+    // Extract role name from session or default to 'User'
+    const roleName = user["http://localhost:3000/roles"] ? user["http://localhost:3000/roles"][0] : 'client';
+
+    // Find or create the role
+    let role = await prisma.role.findUnique({
+        where: {
+            name: roleName,
+        },
+    });
+
+    if (!role) {
+        role = await prisma.role.create({
+            data: {
+                name: roleName,
+            },
+        });
+    }
+
     // Check if user exists in the database
     let dbUser = await prisma.user.findUnique({
         where: {
@@ -63,11 +81,43 @@ export const getServerSideProps = async (context) => {
                 email: user.email,
                 name: user.name,
                 password: user.sub, // Use the user's Auth0 ID as the password
-                roles: user["http://localhost:3000/roles"][0] || null,
+            },
+        });
+        // Now create the UserRole connection
+        await prisma.userRole.create({
+            data: {
+                userId: dbUser.id,
+                roleId: role.id,
+            },
+        });
+    } else {
+        // Ensure user has the role in UserRole
+        await prisma.userRole.upsert({
+            where: {
+                userId_roleId: {
+                    userId: dbUser.id,
+                    roleId: role.id,
+                },
+            },
+            update: {},
+            create: {
+                userId: dbUser.id,
+                roleId: role.id,
             },
         });
     }
-    const userRole = user["http://localhost:3000/roles"][0] || null;
+
+    // Fetch user roles
+    const userRoles = await prisma.userRole.findMany({
+        where: {
+            userId: dbUser.id,
+        },
+        include: {
+            role: true,
+        },
+    });
+
+    const userRole = userRoles.length > 0 ? userRoles[0].role.name : 'client'; // Default to 'User' if no role found
 
     // Fetch events and services from your database here
     const initialEvents = [
