@@ -3,6 +3,7 @@ import CreateUser from '../../../app/components/admin/createUser/CreateUser';
 import Layout from '../../../app/components/admin/layout/LayoutComponent';
 import NotificationSetting from '../../../app/components/admin/notificationSetting/NotificationSetting';
 import styles from './settings.module.scss';
+
 const SettingsPage = () => {
     return (
         <Layout>

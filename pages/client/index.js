@@ -1,5 +1,6 @@
 import { getSession } from '@auth0/nextjs-auth0';
 import dynamic from 'next/dynamic';
+import prisma from '../../app/lib/prisma';
 import styles from './clientHome.module.scss';
 
 const ClientLayout = dynamic(() => import('../../app/components/client/layoutClient/LayoutComponent'));
@@ -46,6 +47,28 @@ export const getServerSideProps = async (context) => {
         };
     }
 
+    const user = session.user;
+
+    // Check if user exists in the database
+    let dbUser = await prisma.user.findUnique({
+        where: {
+            email: user.email,
+        },
+    });
+
+    // If user does not exist, create them
+    if (!dbUser) {
+        dbUser = await prisma.user.create({
+            data: {
+                email: user.email,
+                name: user.name,
+                password: user.sub, // Use the user's Auth0 ID as the password
+                roles: user["http://localhost:3000/roles"][0] || null,
+            },
+        });
+    }
+    const userRole = user["http://localhost:3000/roles"][0] || null;
+
     // Fetch events and services from your database here
     const initialEvents = [
         {
@@ -58,8 +81,8 @@ export const getServerSideProps = async (context) => {
     const services = ['Grooming', 'Veterinary Checkup', 'Swimming'];
     return {
         props: {
-            user: session.user.nickname,
-            role: session.user["http://localhost:3000/roles"][0],
+            user: dbUser.name,
+            role: userRole,
             initialEvents,
             services,
         },
