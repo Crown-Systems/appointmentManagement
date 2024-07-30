@@ -2,11 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #111827;
+  background-color: #20ccc4;
   font-family: "Inter", sans-serif;
   font-size: 1.2em;
   width: 100%;
-  height: 57px;
 }
 
 .topBar {
@@ -20,7 +19,7 @@
 .topBarSearch {
   form {
     position: relative;
-    width: 25vw;
+    width: 20vw;
     border-radius: 5px;
   }
   input,
@@ -32,9 +31,8 @@
   .search {
     background-color: #fff;
     outline: 0;
-    height: 40px;
     width: 100%;
-    padding: 0 1.6rem;
+    padding: 0.25rem 1.6rem;
     border-radius: 5px;
     position: relative;
   }
@@ -63,6 +61,7 @@
 
 .topBarSide {
   display: flex;
+  gap: 1rem;
   .sectionLink {
     display: flex;
     align-items: center;

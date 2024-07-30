@@ -1,7 +1,6 @@
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import Layout from '../../app/components/admin/layout/LayoutComponent';
 import styles from './adminHome.module.scss';
-export default withPageAuthRequired(function adminHomePage() {
+export default function adminHomePage() {
 
   return (
     <Layout>
@@ -74,4 +73,4 @@ export default withPageAuthRequired(function adminHomePage() {
       </div>
     </Layout>
   );
-})
+}

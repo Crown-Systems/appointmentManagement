@@ -1,5 +1,3 @@
-"use client";
-
 import { usePathname } from 'next/navigation';
 import styles from './layoutComponent.module.scss';
 import NavBar from './navbar/Navbar';
@@ -18,9 +16,7 @@ const Layout = ({ children }) => {
       {shouldShowNavbar && <NavBar />}
       <main>
         {shouldShowNavbar && <TopNav />}
-        <div className={styles.content}>
-          {children}
-        </div>
+        {children}
       </main>
     </div>
   );

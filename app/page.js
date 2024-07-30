@@ -19,7 +19,7 @@ const LoginPage = async () => {
     }
 
     const { user } = session;
-    const isUser = user['http://localhost:3000/roles'].some((role) => role === 'user');
+    const isUser = user['http://localhost:3000/roles'].some((role) => role === 'admin');
 
     if (isUser) {
         redirect('/admin');

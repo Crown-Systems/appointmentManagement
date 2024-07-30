@@ -1,36 +1,32 @@
 .container {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background-color: #f0f4f8;
-  border-radius: 10px;
-  max-width: 1200px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  width: 100%;
   margin: 0 auto;
-
-  @media (max-width: 768px) {
-    padding: 15px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
   .search {
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 30px;
     border: 1px solid #ccc;
     width: 200px;
-
-    @media (max-width: 480px) {
-      width: 150px;
-    }
+    outline: none;
   }
 
   .icons {
@@ -40,37 +36,26 @@
     .fa {
       margin: 0 10px;
       font-size: 20px;
-
-      @media (max-width: 480px) {
-        margin: 0 5px;
-      }
+      cursor: pointer;
     }
 
     .userImage {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-
-      @media (max-width: 480px) {
-        width: 30px;
-        height: 30px;
-      }
+      cursor: pointer;
     }
   }
 }
 
 .booking {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
   h1 {
-    font-size: 24px;
+    font-size: 32px;
     margin-bottom: 20px;
-
-    @media (max-width: 768px) {
-      font-size: 20px;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 18px;
-    }
   }
 
   .calendar {
@@ -84,14 +69,6 @@
       text-align: center;
       font-weight: bold;
       margin-bottom: 10px;
-
-      @media (max-width: 768px) {
-        font-size: 18px;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 16px;
-      }
     }
 
     .dates {
@@ -99,25 +76,18 @@
       grid-template-columns: repeat(7, 1fr);
       gap: 10px;
 
-      @media (max-width: 768px) {
-        grid-template-columns: repeat(5, 1fr);
-      }
-
-      @media (max-width: 480px) {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 5px;
-      }
-
       .date {
         text-align: center;
         padding: 10px;
         border-radius: 5px;
         cursor: pointer;
+
         &:hover {
           background-color: #f0f0f0;
         }
+
         &.selectedDate {
-          background-color: #20ccc4;
+          background-color: #4a4e69;
           color: #fff;
         }
       }
@@ -125,32 +95,24 @@
   }
 
   .slots {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
     h2 {
-      font-size: 20px;
-      margin-bottom: 10px;
-
-      @media (max-width: 768px) {
-        font-size: 18px;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 16px;
-      }
+      font-size: 24px;
+      margin-bottom: 20px;
     }
 
     .slotGrid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-
-      @media (max-width: 768px) {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      @media (max-width: 480px) {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 5px;
-      }
+      margin-bottom: 20px;
 
       .slot {
         text-align: center;
@@ -158,34 +120,30 @@
         border-radius: 5px;
         border: 1px solid #ccc;
         cursor: pointer;
+
         &:hover {
           background-color: #f0f0f0;
         }
+
         &.selectedSlot {
-          background-color: #20ccc4;
+          background-color: #4a4e69;
           color: #fff;
         }
       }
     }
 
     .continueButton {
-      margin-top: 20px;
       padding: 10px 20px;
       border: none;
-      border-radius: 5px;
-      background-color: #20ccc4;
+      border-radius: 30px;
+      background-color: #4a4e69;
       color: #fff;
       cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+
       &:hover {
-        background-color: #fefefe;
-      }
-
-      @media (max-width: 768px) {
-        padding: 8px 16px;
-      }
-
-      @media (max-width: 480px) {
-        padding: 6px 12px;
+        background-color: #5a5e79;
       }
     }
 
@@ -193,14 +151,125 @@
       margin-top: 10px;
       font-size: 12px;
       color: #888;
-
-      @media (max-width: 768px) {
-        font-size: 10px;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 8px;
-      }
+      text-align: center;
     }
+  }
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  .container {
+    max-width: 1000px;
+  }
+
+  .booking h1 {
+    font-size: 28px;
+  }
+
+  .booking .calendar .calendarHeader {
+    font-size: 20px;
+  }
+
+  .booking .slots h2 {
+    font-size: 22px;
+  }
+
+  .booking .slots .slotGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .booking {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .booking h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .booking .calendar,
+  .booking .slots {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .booking .calendar .calendarHeader {
+    font-size: 18px;
+  }
+
+  .booking .calendar .dates {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .booking .slots h2 {
+    font-size: 18px;
+  }
+
+  .booking .slots .slotGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .booking .slots .continueButton {
+    padding: 8px 16px;
+  }
+
+  .booking .slots .reschedulingNotice {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .header .search {
+    width: 150px;
+  }
+
+  .header .icons .fa {
+    margin: 0 5px;
+  }
+
+  .header .icons .userImage {
+    width: 30px;
+    height: 30px;
+  }
+
+  .booking h1 {
+    font-size: 20px;
+  }
+
+  .booking .calendar .calendarHeader {
+    font-size: 16px;
+  }
+
+  .booking .calendar .dates {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+
+  .booking .slots h2 {
+    font-size: 16px;
+  }
+
+  .booking .slots .slotGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+
+  .booking .slots .continueButton {
+    padding: 6px 12px;
+  }
+
+  .booking .slots .reschedulingNotice {
+    font-size: 8px;
   }
 }

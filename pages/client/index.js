@@ -50,7 +50,7 @@ export const getServerSideProps = async (context) => {
     const user = session.user;
 
     // Extract role name from session or default to 'User'
-    const roleName = user["http://localhost:3000/roles"] ? user["http://localhost:3000/roles"][0] : 'client';
+    const roleName = user["http://localhost:3000/roles"] ? user["http://localhost:3000/roles"][0] : null;
 
     // Find or create the role
     let role = await prisma.role.findUnique({
@@ -117,7 +117,7 @@ export const getServerSideProps = async (context) => {
         },
     });
 
-    const userRole = userRoles.length > 0 ? userRoles[0].role.name : 'client'; // Default to 'User' if no role found
+    const userRole = userRoles.length > 0 ? userRoles[0].role.name : null; // Default to 'User' if no role found
 
     // Fetch events and services from your database here
     const initialEvents = [
