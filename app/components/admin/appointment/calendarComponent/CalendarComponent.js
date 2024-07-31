@@ -10,18 +10,11 @@ import styles from './calendarComponent.module.scss';
 const localizer = momentLocalizer(moment);
 
 const CalendarComponent = ({ events }) => {
-    const [allEvents, setAllEvents] = useState(events);
-    const [unavailability, setUnavailability] = useState([]);
+    const [allEvents, setAllEvents] = useState([]);
 
     useEffect(() => {
-        fetch('/api/unavailability')
-            .then(response => response.json())
-            .then(data => setUnavailability(data));
-    }, []);
-
-    useEffect(() => {
-        setAllEvents([...events, ...unavailability]);
-    }, [events, unavailability]);
+        setAllEvents(events);
+    }, [events]);
 
     const handleSelectSlot = async ({ start, end }) => {
         const title = window.prompt('New Appointment Title');
@@ -35,7 +28,7 @@ const CalendarComponent = ({ events }) => {
                 body: JSON.stringify(newAppointment),
             });
             const data = await response.json();
-            setAllEvents([...allEvents, data]);
+            setAllEvents(prevEvents => [...prevEvents, { ...data, type: 'appointment' }]);
 
             // Also add to unavailability
             const newUnavailability = { start, end, reason: title };
@@ -46,7 +39,7 @@ const CalendarComponent = ({ events }) => {
                 },
                 body: JSON.stringify(newUnavailability),
             });
-            setUnavailability([...unavailability, newUnavailability]);
+            setAllEvents(prevEvents => [...prevEvents, { ...newUnavailability, type: 'unavailability', title }]);
         }
     };
 
@@ -62,7 +55,7 @@ const CalendarComponent = ({ events }) => {
                 body: JSON.stringify(newUnavailability),
             });
             const data = await response.json();
-            setUnavailability([...unavailability, data]);
+            setAllEvents(prevEvents => [...prevEvents, { ...data, type: 'unavailability' }]);
         }
     };
 
