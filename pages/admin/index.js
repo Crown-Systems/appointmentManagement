@@ -1,6 +1,16 @@
+import UnauthorizedPage from '@/app/components/unauthorize';
+import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import Layout from '../../app/components/admin/layout/LayoutComponent';
 import styles from './adminHome.module.scss';
-export default function adminHomePage() {
+
+export default function adminHomePage({ user }) {
+  const userRoles = user['http://localhost:3000/roles'] || [];
+  console.log(userRoles);
+  if (!userRoles.includes('admin')) {
+    return (
+      <UnauthorizedPage />
+    );
+  }
 
   return (
     <Layout>
@@ -74,3 +84,29 @@ export default function adminHomePage() {
     </Layout>
   );
 }
+
+// Secure the page and retrieve session data
+export const getServerSideProps = withPageAuthRequired({
+  // This will redirect the user to the login page if they're not authenticated
+  returnTo: '/admin', // Optional: path to return to after login
+  getServerSideProps: async ({ req, res }) => {
+    // Access the session information
+    const session = await getSession(req, res);
+
+    if (!session || !session.user) {
+      // If no session or user data, redirect to login
+      return {
+        redirect: {
+          destination: '/api/auth/login',
+          permanent: false,
+        },
+      };
+    }
+
+    return {
+      props: {
+        user: session.user, // Pass user data to the page component
+      },
+    };
+  },
+});

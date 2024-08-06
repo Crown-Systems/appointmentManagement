@@ -61,7 +61,7 @@ const CalendarComponent = ({ events, services, onAddEvent }) => {
                 <div className={styles.slots}>
                     <h2>Choose Slot</h2>
                     <div className={styles.slotGrid}>
-                        {availableSlots.map((slot, index) => (
+                        {availableSlots?.map((slot, index) => (
                             <div
                                 key={index}
                                 className={`${styles.slot} ${selectedSlot === slot ? styles.selectedSlot : ''}`}
