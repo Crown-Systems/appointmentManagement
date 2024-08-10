@@ -1,33 +1,23 @@
+// src/app/calendarComponent/page.js
+
 import moment from 'moment';
-import { useEffect, useState } from 'react';
 import { momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import prisma from '../../../../app/lib/prisma'; // Ensure this is set up to access your database
 import styles from './calendarComponent.module.scss';
 
 const localizer = momentLocalizer(moment);
 
-const CalendarComponent = ({ events, services, onAddEvent }) => {
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [availableSlots, setAvailableSlots] = useState([]);
-    const [selectedSlot, setSelectedSlot] = useState(null);
+const CalendarComponent = () => {
+    // Fetch available slots asynchronously
+    const availableSlots = getAvailableSlots();
 
-    useEffect(() => {
-        const fetchAvailableSlots = async () => {
-            const response = await fetch(`/api/availableSlots?date=${selectedDate.toISOString()}`);
-            const data = await response.json();
-            setAvailableSlots(data.slots);
-        };
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-        fetchAvailableSlots();
-    }, [selectedDate]);
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
-
-    const handleSlotChange = (slot) => {
-        setSelectedSlot(slot);
-    };
+    console.log('Available Slots:', availableSlots);
 
     return (
         <div className={styles.container}>
@@ -35,39 +25,89 @@ const CalendarComponent = ({ events, services, onAddEvent }) => {
             <div className={styles.booking}>
                 <div className={styles.calendar}>
                     <div className={styles.calendarHeader}>
-                        <span>JULY 2023</span>
+                        <span>{moment().month(currentMonth).format('MMMM YYYY')}</span>
                     </div>
                     <div className={styles.dates}>
-                        {[...Array(31)].map((_, index) => (
-                            <div
-                                key={index}
-                                className={`${styles.date} ${selectedDate.getDate() === index + 1 ? styles.selectedDate : ''}`}
-                                onClick={() => handleDateChange(new Date(2023, 6, index + 1))}
-                            >
-                                {index + 1}
-                            </div>
-                        ))}
+                        {[...Array(daysInMonth)].map((_, index) => {
+                            const day = index + 1; // Day of the month
+                            const isSelected = availableSlots[day] && availableSlots[day].length > 0;
+
+                            return (
+                                <div
+                                    key={day}
+                                    className={`${styles.date} ${isSelected ? styles.selectedDate : ''}`}
+                                >
+                                    {day}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
                 <div className={styles.slots}>
                     <h2>Choose Slot</h2>
                     <div className={styles.slotGrid}>
-                        {availableSlots?.map((slot, index) => (
-                            <div
-                                key={index}
-                                className={`${styles.slot} ${selectedSlot === slot ? styles.selectedSlot : ''}`}
-                                onClick={() => handleSlotChange(slot)}
-                            >
+                        {availableSlots[today.getDate()]?.map((slot, index) => (
+                            <div key={index} className={styles.slot}>
                                 {slot}
                             </div>
                         ))}
                     </div>
                     <button className={styles.continueButton}>CONTINUE</button>
-                    <p className={styles.reschedulingNotice}>Rescheduling charges may apply.</p>
+                    <p className={styles.reschedulingNotice}>
+                        Rescheduling charges may apply.
+                    </p>
                 </div>
             </div>
         </div>
+
     );
 };
+
+// Server-side data fetching
+async function getAvailableSlots() {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const endOfMonth = new Date(currentYear, currentMonth + 1, 0);
+
+    try {
+        // Fetch all unavailability entries for the current month
+        const unavailabilities = await prisma.unavailability.findMany({
+            where: {
+                start: {
+                    gte: new Date(currentYear, currentMonth, 1),
+                    lt: endOfMonth,
+                },
+            },
+        });
+
+        // Check and create available slots
+        const availableSlots = {};
+        for (let day = 1; day <= endOfMonth.getDate(); day++) {
+            availableSlots[day] = [];
+            const currentDate = new Date(currentYear, currentMonth, day);
+            for (let hour = 9; hour < 18; hour++) {
+                const slotStart = new Date(currentDate);
+                slotStart.setHours(hour, 0, 0, 0);
+                const slotEnd = new Date(slotStart);
+                slotEnd.setHours(hour + 1, 0, 0, 0);
+
+                if (!unavailabilities.some((u) => slotStart < u.end && slotEnd > u.start)) {
+                    const slotLabel = `${slotStart.toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                    })} - ${slotEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+                    availableSlots[day].push(slotLabel);
+                }
+            }
+        }
+
+        console.log('Available Slots:', availableSlots);
+        return availableSlots; // Directly return the slots
+    } catch (error) {
+        console.error('Error fetching available slots:', error);
+        return {}; // Return an empty object in case of an error
+    }
+}
 
 export default CalendarComponent;
