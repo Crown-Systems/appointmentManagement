@@ -31,7 +31,7 @@ const NavBarClient = () => {
                     <Link className={`${styles.sectionLink} ${path == "/client/appointments" && styles.highlight}`} href="/client/appointments">
                         <Image src="/icons/calendarIcon.png" alt="calendar" width={24} height={24} />
                     </Link>
-                    <Link className={`${styles.sectionLink} ${path == "/client/services" && styles.highlight}`} href="/client/services">
+                    <Link className={`${styles.sectionLink} ${path == "/client/bookings" && styles.highlight}`} href="/client/bookings">
                         <Image src="/icons/serviceIcon.png" alt="services" width={24} height={24} />
                     </Link>
                     <Link className={`${styles.sectionLink} ${path == "/client/user" && styles.highlight}`} href="/client/user">

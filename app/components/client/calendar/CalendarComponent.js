@@ -1,5 +1,4 @@
 import moment from 'moment';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -32,16 +31,8 @@ const CalendarComponent = ({ events, services, onAddEvent }) => {
 
     return (
         <div className={styles.container}>
-            <header className={styles.header}>
-                <input type="text" placeholder="Search" className={styles.search} />
-                <div className={styles.icons}>
-                    <i className="fa fa-bell"></i>
-                    <i className="fa fa-question-circle"></i>
-                    <Image src="/icons/userIcon.png" width={24} height={24} alt="User" className={styles.userImage} />
-                </div>
-            </header>
+            <h1>Book Appointment</h1>
             <div className={styles.booking}>
-                <h1>Book Appointment</h1>
                 <div className={styles.calendar}>
                     <div className={styles.calendarHeader}>
                         <span>JULY 2023</span>

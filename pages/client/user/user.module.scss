@@ -1,0 +1,29 @@
+// src/app/user/profile.module.scss
+
+.profileContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Roboto", sans-serif;
+  background-color: #f7f8fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .userInfo {
+    p {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #555;
+
+      strong {
+        color: #333;
+      }
+    }
+  }
+}
