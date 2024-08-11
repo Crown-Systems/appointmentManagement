@@ -4,17 +4,23 @@ import moment from 'moment';
 import { momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import prisma from '../../../../app/lib/prisma'; // Ensure this is set up to access your database
+import CalendarClient from './CalendarClient'; // Client component for interactivity
 import styles from './calendarComponent.module.scss';
 
 const localizer = momentLocalizer(moment);
 
-const CalendarComponent = () => {
-    // Fetch available slots asynchronously
-    const availableSlots = getAvailableSlots();
+export const metadata = {
+    title: 'Calendar Page',
+    description: 'Calendar to book appointments',
+};
 
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth();
+const CalendarComponent = ({ searchParams = {} }) => {
+    // Extract month and year from searchParams
+    const currentMonth = searchParams.month ? parseInt(searchParams.month, 10) : new Date().getMonth();
+    const currentYear = searchParams.year ? parseInt(searchParams.year, 10) : new Date().getFullYear();
+
+    // Fetch available slots for the current month and year
+    const availableSlots = getAvailableSlots(currentYear, currentMonth);
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
     console.log('Available Slots:', availableSlots);
@@ -24,8 +30,9 @@ const CalendarComponent = () => {
             <h1>Book Appointment</h1>
             <div className={styles.booking}>
                 <div className={styles.calendar}>
+                    <CalendarClient currentMonth={currentMonth} currentYear={currentYear} />
                     <div className={styles.calendarHeader}>
-                        <span>{moment().month(currentMonth).format('MMMM YYYY')}</span>
+                        <span>{moment().year(currentYear).month(currentMonth).format('MMMM YYYY')}</span>
                     </div>
                     <div className={styles.dates}>
                         {[...Array(daysInMonth)].map((_, index) => {
@@ -46,7 +53,7 @@ const CalendarComponent = () => {
                 <div className={styles.slots}>
                     <h2>Choose Slot</h2>
                     <div className={styles.slotGrid}>
-                        {availableSlots[today.getDate()]?.map((slot, index) => (
+                        {availableSlots[new Date().getDate()]?.map((slot, index) => (
                             <div key={index} className={styles.slot}>
                                 {slot}
                             </div>
@@ -59,23 +66,19 @@ const CalendarComponent = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 
-// Server-side data fetching
-async function getAvailableSlots() {
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth();
-    const endOfMonth = new Date(currentYear, currentMonth + 1, 0);
+// Modify the function to accept year and month
+async function getAvailableSlots(year, month) {
+    const endOfMonth = new Date(year, month + 1, 0);
 
     try {
         // Fetch all unavailability entries for the current month
         const unavailabilities = await prisma.unavailability.findMany({
             where: {
                 start: {
-                    gte: new Date(currentYear, currentMonth, 1),
+                    gte: new Date(year, month, 1),
                     lt: endOfMonth,
                 },
             },
@@ -85,7 +88,7 @@ async function getAvailableSlots() {
         const availableSlots = {};
         for (let day = 1; day <= endOfMonth.getDate(); day++) {
             availableSlots[day] = [];
-            const currentDate = new Date(currentYear, currentMonth, day);
+            const currentDate = new Date(year, month, day);
             for (let hour = 9; hour < 18; hour++) {
                 const slotStart = new Date(currentDate);
                 slotStart.setHours(hour, 0, 0, 0);
